@@ -7,6 +7,8 @@ const dom_choiceC = document.querySelector("#C");
 const dom_choiceD = document.querySelector("#D");
 const dom_score = document.querySelector("#score");
 const dom_start = document.querySelector("#start");
+const dom_score_img = document.querySelector("#image");
+
 
 dom_start.addEventListener("click", onStart);
 
@@ -44,30 +46,73 @@ let score = 0;
 
 // Hide a given element
 function hide(element) {
-  // TODO
+  element.style.display = "none";
 }
 
 function show(element) {
   // TODO
+  element.style.display = "block";
 }
 
 function onStart() {
   // Render the current question
   // Display the quiz view,
+  hide(dom_start);
+  show(dom_quiz);
+  dom_question.textContent = questions[runningQuestionIndex].title;
+  dom_choiceA.textContent = questions[runningQuestionIndex].choiceA;
+  dom_choiceB.textContent = questions[runningQuestionIndex].choiceB;
+  dom_choiceC.textContent = questions[runningQuestionIndex].choiceC;
+  dom_choiceD.textContent = questions[runningQuestionIndex].choiceD;
 }
 
-function renderQuestion() {
-  // Render the current question on the quiz view
+
+
+function renderSCore() {
+  // calculate the amount of question percent answered by the user
+  // choose the image based on the percent
+  hide(dom_quiz);
+  show(dom_score);
+  let comment = "";
+  let image = "";
+  let percent = (score * 100) / 3;
+
+  if (percent <= 20) {
+    comment = "HUMM !";
+    image += "./img/20.png";
+  } else if (percent <= 40) {
+    comment = "YOU CAN IMPROVE !";
+    image += "./img/40.png";
+  } else if (percent <= 60) {
+    comment = "NOT BAD BUT... !";
+    image += "./img/60.png";
+  } else if (percent <= 80) {
+    comment = " GOOD !";
+    image += "./img/80.png";
+  } else {
+    comment = "CRAZY AMAZING !";
+    image += "./img/100.png";
+  }
+  dom_score.innerHTML = "<p style = 'color : red'> your score : "+Math.round(percent)+"%</p>";  
+  dom_score_img.src = image;
 }
 
 function onPlayerSubmit(answer) {
   // Update the score, display the next question or the score view
+  
+  if(answer == questions[runningQuestionIndex].correct){
+    score += 1;
+  }
+  runningQuestionIndex+=1;
+  if (runningQuestionIndex == 3) {
+    renderSCore();
+    return 0;
+  }  
+  onStart();
 }
 
-function renderSCore() {
-  // calculate the amount of question percent answered by the user
-  // choose the image based on the scorePerCent
-}
+
+
 
 // FUNCTIONS ---------------------------------------------------------
 show(dom_start);

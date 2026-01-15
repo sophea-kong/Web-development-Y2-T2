@@ -44,6 +44,26 @@ let score = 0;
 
 // FUNCTIONS ---------------------------------------------------------
 
+function goHome(){
+  hide(dom_quiz);
+  hide(dom_question);
+  hide(dom_score);
+  show(dom_start);
+}
+
+function goQuiz(){
+  hide(dom_start);
+  show(dom_quiz);
+  show(dom_question);
+  dom_question.textContent = questions[runningQuestionIndex].title;
+  dom_choiceA.textContent = questions[runningQuestionIndex].choiceA;
+  dom_choiceB.textContent = questions[runningQuestionIndex].choiceB;
+  dom_choiceC.textContent = questions[runningQuestionIndex].choiceC;
+  dom_choiceD.textContent = questions[runningQuestionIndex].choiceD;
+}
+
+
+
 // Hide a given element
 function hide(element) {
   element.style.display = "none";
@@ -59,6 +79,7 @@ function onStart() {
   // Display the quiz view,
   hide(dom_start);
   show(dom_quiz);
+  show(dom_question);
   dom_question.textContent = questions[runningQuestionIndex].title;
   dom_choiceA.textContent = questions[runningQuestionIndex].choiceA;
   dom_choiceB.textContent = questions[runningQuestionIndex].choiceB;
@@ -93,7 +114,7 @@ function renderSCore() {
     comment = "CRAZY AMAZING !";
     image += "./img/100.png";
   }
-  dom_score.innerHTML = "<p style = 'color : red'> your score : "+Math.round(percent)+"%</p>";  
+  dom_score.innerHTML = "<p style = 'color : red; font-size:50px;'> your score : "+Math.round(percent)+"%</p>";  
   dom_score_img.src = image;
 }
 

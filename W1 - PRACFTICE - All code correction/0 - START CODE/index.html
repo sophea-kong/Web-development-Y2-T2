@@ -6,7 +6,14 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script defer src="./views/quiz.js"></script>
   </head>
-  <body>
+  <body style="display: flex; flex-direction: column; gap: 8/10;">
+    <div style="display: block; align-self: top;">
+    <nav style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+      <a onclick="goHome()" style="display: inline; padding: 30px; background-color: antiquewhite;">Home</a>
+      <a onclick="goQuiz()" style="display: inline; padding: 30px; background-color: antiquewhite;">Quiz</a>
+      <a onclick="goQuiz()" style="display: inline; padding: 30px; background-color: antiquewhite;" href="./views/editor/edit.html">Quiz</a>
+    </nav>
+  </div>
     <div id="start" style="display: none">Start Quiz!</div>
 
     <div id="quiz">
@@ -21,7 +28,7 @@
 
       
     </div>
-    <img id="image">
-    <div id="score" style="display: none"></div>
+    <img id="image" width="200px">
+    <div id="score" style="display: none; font-size: 30px;"></div>
   </body>
 </html>
